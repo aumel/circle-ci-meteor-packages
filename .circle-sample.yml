@@ -1,4 +1,4 @@
-## Add this file to your meteor package as `.travis.yml`
+## Add this file to your meteor package as `.circle.yml`
 
 machine:
   node:
