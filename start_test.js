@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var spawn = require('child_process').spawn;
+var fs = require('fs');
 
 var workingDir = process.env.WORKING_DIR || process.env.PACKAGE_DIR || './';
 var args = ['test-packages', '--once', '--driver-package', 'test-in-console', '-p', 10015];
@@ -11,11 +12,10 @@ if (typeof process.env.METEOR_RELEASE !== 'undefined' &&
     args.push(process.env.METEOR_RELEASE);
 }
 
-
-if (typeof process.env.PACKAGES === 'undefined') {
+if (typeof process.env.PACKAGES === 'undefined' && fs.existsSync(workingDir + 'package.js')) {
   args.push('./');
 }
-else if (process.env.PACKAGES !== '') {
+else if (typeof process.env.PACKAGES !== 'undefined' && process.env.PACKAGES !== '') {
   args = args.concat(process.env.PACKAGES.split(';'));
 }
 
@@ -28,16 +28,16 @@ meteor.on('close', function (code) {
 });
 
 meteor.stdout.on('data', function startTesting(data) {
-  var data = data.toString();
+  data = data.toString();
   if(data.match(/10015|test-in-console listening/)) {
     console.log('starting testing...');
     meteor.stdout.removeListener('data', startTesting);
     runTestSuite();
-  } 
+  }
 });
 
 function runTestSuite() {
-  process.env.URL = "http://localhost:10015/"
+  process.env.URL = "http://localhost:10015/";
   var phantomjs = spawn('phantomjs', ['./phantom_runner.js']);
   phantomjs.stdout.pipe(process.stdout);
   phantomjs.stderr.pipe(process.stderr);
