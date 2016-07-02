@@ -1,7 +1,7 @@
 circle-ci-meteor-packages
 =========================
 
-###Utilities for running Circle CI tests on Meteor Packages (tinytest).
+### Utilities for running Circle CI tests on Meteor Packages (tinytest).
 
 Fork modified from arunoda/travis-ci-meteor-packages to work with Circle CI.
 
