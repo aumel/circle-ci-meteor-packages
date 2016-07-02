@@ -4,7 +4,7 @@ machine:
   node:
     version: 0.10.33
   pre:
-    - curl -L https://git.io/vKvb4 | /bin/sh
+    - curl -L https://git.io/vKvNt | /bin/sh
 test:
   override:
     - node /home/ubuntu/start_test.js
