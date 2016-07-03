@@ -5,7 +5,7 @@ circle-ci-meteor-packages
 
 Fork modified from arunoda/travis-ci-meteor-packages to work with Circle CI.
 
-Add following file to your meteor package as `.circle.yml`
+Add following file to your meteor package as `circle.yml`
 
 ```
 machine:
